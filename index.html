@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KR TAKA INCOME</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root { --primary: #007bff; --bg: #f1f4f9; --fb: #1877F2; --tt: #010101; }
+    body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
+    
+    .header { background: white; padding: 15px 20px; display: flex; align-items: center; border-bottom: 1px solid #e0e0e0; }
+    .profile-pic { width: 50px; height: 50px; background: #ff7675; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-weight: bold; margin-right: 15px; }
+    
+    .content-section { padding: 20px; flex: 1; overflow-y: auto; padding-bottom: 90px; display: none; }
+    .content-section.active { display: block; }
+    .card { background: white; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    
+    .btn { width: 100%; padding: 14px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; margin-top: 10px; display: block; text-decoration: none; }
+    .btn-blue { background: var(--primary); color: white; }
+    .btn-outline { background: white; border: 1px solid var(--primary); color: var(--primary); }
+    
+    .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #ddd; }
+    .nav-item { text-align: center; color: #888; font-size: 12px; cursor: pointer; flex: 1; }
+    .nav-item.active { color: var(--primary); }
+    .nav-item i { font-size: 20px; display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="profile-pic" id="profile-initial">K</div>
+    <div>
+      <h3 style="margin:0;"><span id="user-name">KR Khalid</span> <i class="fas fa-check-circle" style="color:var(--primary);"></i></h3>
+      <p style="margin:0; font-weight:bold;">ব্যালেন্স: <span id="user-balance">0</span> টাকা 💰</p>
+    </div>
+  </div>
+
+  <div id="home" class="content-section active">
+    <h3>Dashboard</h3>
+    <div class="card">
+      <p style="color:green; font-weight:bold;">প্রতি রেফারে আয় ২৫ টাকা!</p>
+      <input type="text" readonly id="refLink" value="https://t.me/Kr_taka_income_bot?start=871534" style="width:100%; padding:10px; margin:10px 0; border:1px solid #ddd; border-radius:5px;">
+      <button class="btn btn-blue" onclick="copyRef()">Copy Referral Link</button>
+      <p>মোট রেফার: <span id="total-refs">0</span></p>
+    </div>
+  </div>
+
+  <div id="tasks" class="content-section">
+    <h3>Earn Money</h3>
+    <div class="card">
+      <i class="fab fa-facebook" style="font-size:30px; color:var(--fb);"></i>
+      <p>ফেসবুক পেজ ফলো করুন (১০ টাকা)</p>
+      <a href="https://www.facebook.com/profile.php?id=61586764666017" target="_blank" class="btn btn-blue" style="background:var(--fb);">Follow Page</a>
+      <button class="btn btn-outline" onclick="claimTask(10, 'Facebook')">Check & Claim</button>
+    </div>
+    <div class="card">
+      <i class="fab fa-tiktok" style="font-size:30px; color:var(--tt);"></i>
+      <p>টিকটক ফলো করুন (১০ টাকা)</p>
+      <a href="https://tiktok.com/@krkhalidtechbangla560" target="_blank" class="btn btn-blue" style="background:var(--tt);">Follow TikTok</a>
+      <button class="btn btn-outline" onclick="claimTask(10, 'TikTok')">Check & Claim</button>
+    </div>
+    <div class="card">
+      <i class="fas fa-video" style="font-size:30px; color:red;"></i>
+      <p>অ্যাড দেখে আয় করুন (৫ টাকা)</p>
+      <button class="btn btn-blue" onclick="showAdAndEarn()">Watch Ad</button>
+    </div>
+  </div>
+
+  <div id="withdraw" class="content-section">
+    <h3>Withdraw</h3>
+    <div class="card" style="text-align:left;">
+      <p style="color:red; font-size:13px; font-weight:bold;">⚠️ শর্ত: সর্বনিম্ন ১৫০০ টাকা এবং ২৫টি রেফারেল প্রয়োজন।</p>
+      <label>Bkash Number:</label>
+      <input type="text" id="phone" placeholder="017XXXXXXXX" style="width:100%; padding:10px; margin:10px 0; border:1px solid #ddd; border-radius:5px;">
+      <label>Amount:</label>
+      <input type="number" id="amount" placeholder="1500" style="width:100%; padding:10px; margin:10px 0; border:1px solid #ddd; border-radius:5px;">
+      <button class="btn btn-blue" onclick="handleWithdraw()">Submit Withdraw</button>
+    </div>
+  </div>
+
+  <nav class="nav-bar">
+    <div class="nav-item active" onclick="showPage('home', this)"><i class="fas fa-home"></i>Home</div>
+    <div class="nav-item" onclick="showPage('tasks', this)"><i class="fas fa-tasks"></i>Tasks</div>
+    <div class="nav-item" onclick="showPage('withdraw', this)"><i class="fas fa-wallet"></i>Withdraw</div>
+  </nav>
+
+  <script src='//libtl.com/sdk.js' data-zone='10691247' data-sdk='show_10691247'></script>
+  <script>
+    const firebaseConfig = { databaseURL: "https://kr-taka-income-default-rtdb.firebaseio.com/" };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const tg = window.Telegram.WebApp;
+    const user = tg.initDataUnsafe?.user;
+    const userId = user?.id || "871534";
+    const userRef = db.ref('users/' + userId);
+
+    userRef.on('value', (snapshot) => {
+      const data = snapshot.val() || { balance: 30, referrals: 0 };
+      document.getElementById("user-balance").innerText = data.balance;
+      document.getElementById("total-refs").innerText = data.referrals;
+      document.getElementById("user-name").innerText = user?.first_name || "KR Khalid";
+      document.getElementById("profile-initial").innerText = (user?.first_name || "K").charAt(0).toUpperCase();
+    });
+
+    function claimTask(amt, name) {
+      userRef.child('balance').transaction(b => (b || 0) + amt);
+      alert(name + " টাস্ক সফল! " + amt + " টাকা যোগ হয়েছে।");
+    }
+
+    function showAdAndEarn() {
+      if (typeof show_10691247 === 'function') {
+        show_10691247().then(() => claimTask(5, 'Ad'));
+      } else { alert("অ্যাড লোড হচ্ছে..."); }
+    }
+
+    function handleWithdraw() {
+      const amt = document.getElementById("amount").value;
+      userRef.once('value').then(s => {
+        const d = s.val();
+        if ((d.balance || 0) < 1500 || (d.referrals || 0) < 25) {
+          alert("শর্ত পূরণ হয়নি! ১৫০০ টাকা এবং ২৫টি রেফার প্রয়োজন।");
+        } else if (amt < 1500) {
+          alert("সর্বনিম্ন ১৫০০ টাকা উইথড্র করুন।");
+        } else {
+          alert("রিকোয়েস্ট সফল হয়েছে!");
+        }
+      });
+    }
+
+    function showPage(id, el) {
+      document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      el.classList.add('active');
+    }
+
+    function copyRef() {
+      const link = document.getElementById("refLink");
+      link.select();
+      navigator.clipboard.writeText(link.value);
+      alert("লিঙ্ক কপি হয়েছে!");
+    }
+  </script>
+</body>
+</html>
