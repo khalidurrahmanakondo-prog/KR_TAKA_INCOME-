@@ -162,10 +162,14 @@
     // Sync Data
     userRef.on('value', (snapshot) => {
       const data = snapshot.val();
-      const name = user?.first_name || "User";
       
-      document.getElementById("user-name").innerText = name;
-      document.getElementById("profile-pic").innerText = name.charAt(0).toUpperCase();
+      // ফার্স্ট নেম এবং লাস্ট নেম মিলিয়ে ফুল নেম তৈরি
+      const firstName = user?.first_name || "User";
+      const lastName = user?.last_name || "";
+      const fullName = (firstName + " " + lastName).trim();
+      
+      document.getElementById("user-name").innerText = fullName;
+      document.getElementById("profile-pic").innerText = firstName.charAt(0).toUpperCase();
       document.getElementById("u-id").innerText = userId;
       document.getElementById("refLink").value = "https://t.me/Kr_taka_income_bot?start=" + userId;
 
@@ -174,22 +178,19 @@
         document.getElementById("points-count").innerText = (data.balance || 0).toFixed(2);
         document.getElementById("ads-count").innerText = data.adsCount || 0;
         
-        // Lock/Unlock Logic
         const isFollowedAll = data.fbFollowed && data.ttFollowed && data.tgFollowed;
         document.getElementById("lock-layer").style.display = isFollowedAll ? "none" : "flex";
 
-        // UI Opacity for verified tasks
         if(data.fbFollowed) document.getElementById("fb-box").style.opacity = "0.6";
         if(data.ttFollowed) document.getElementById("tt-box").style.opacity = "0.6";
         if(data.tgFollowed) document.getElementById("tg-box").style.opacity = "0.6";
       } else {
-        // Initial Data for New User
-        userRef.set({ name: name, balance: 30, referrals: 0, fbFollowed: false, ttFollowed: false, tgFollowed: false, adsCount: 0 });
+        userRef.set({ name: fullName, balance: 30, referrals: 0, fbFollowed: false, ttFollowed: false, tgFollowed: false, adsCount: 0 });
       }
     });
 
     function verifyTask(type) {
-      if(confirm("আপনি কি নিশ্চিত ফলো করেছেন? ভুল তথ্য দিলে আইডি ব্লক হতে পারে।")) {
+      if(confirm("আপনি কি নিশ্চিত ফলো করেছেন?")) {
         let update = {};
         if(type === 'fb') update.fbFollowed = true;
         if(type === 'tt') update.ttFollowed = true;
@@ -205,25 +206,20 @@
           userRef.once('value').then(s => {
             let d = s.val();
             userRef.update({ balance: (d.balance || 0) + 5, adsCount: (d.adsCount || 0) + 1 });
-            alert("৫ টাকা আপনার ওয়ালেটে যোগ হয়েছে!");
+            alert("৫ টাকা যোগ হয়েছে!");
           });
-        }).catch(err => alert("বিজ্ঞাপন লোড হয়নি, আবার চেষ্টা করুন।"));
+        }).catch(err => alert("বিজ্ঞাপন লোড হয়নি।"));
       }
     }
 
     function handleWithdraw() {
       const phone = document.getElementById("phone").value;
       const amt = document.getElementById("amount").value;
-      
       if(!phone || !amt) return alert("সবগুলো বক্স পূরণ করুন!");
-      
       userRef.once('value').then(s => {
         const d = s.val();
-        if ((d.balance || 0) < 1500 || (d.referrals || 0) < 25) {
-          alert("দুঃখিত! শর্ত অপূর্ণ। ১৫০০ টাকা ও ২৫ রেফার লাগবে।");
-        } else {
-          alert("রিকোয়েস্ট জমা হয়েছে! ২৪-৭২ ঘণ্টার মধ্যে পেমেন্ট পাবেন।");
-        }
+        if ((d.balance || 0) < 1500 || (d.referrals || 0) < 25) alert("শর্ত অপূর্ণ!");
+        else alert("রিকোয়েস্ট জমা হয়েছে!");
       });
     }
 
@@ -237,11 +233,9 @@
     function copyRef() {
       const link = document.getElementById("refLink");
       link.select();
-      link.setSelectionRange(0, 99999); 
       navigator.clipboard.writeText(link.value);
       alert("রেফার লিঙ্ক কপি হয়েছে!");
     }
-    
     tg.expand();
   </script>
 </body>
