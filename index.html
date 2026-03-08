@@ -17,24 +17,34 @@
       --btn-grad: linear-gradient(90deg, #00e676, #ff9100);
       --accent-yellow: #ffeb3b;
     }
+
     body { font-family: 'Segoe UI', sans-serif; background: var(--bg-dark); color: var(--text-main); margin: 0; padding: 0; overflow-x: hidden; }
+    
     .header { padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #222; }
     .profile-initial { width: 45px; height: 45px; background: var(--btn-grad); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; margin-right: 12px; }
+
     .content-section { padding: 15px; padding-bottom: 90px; display: none; }
     .content-section.active { display: block; }
-    .premium-banner { background: var(--btn-grad); padding: 20px 15px; border-radius: 15px; text-align: center; margin-bottom: 15px; }
+
+    .premium-banner { background: var(--btn-grad); padding: 20px 15px; border-radius: 15px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+
     .user-stats-card { background: var(--card-bg); border-radius: 15px; padding: 15px; margin-bottom: 15px; position: relative; border: 1px solid #222; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
     .stat-box { background: #222; padding: 10px; border-radius: 10px; text-align: center; border: 1px solid #333; }
-    .btn-grad { background: var(--btn-grad); color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; margin-top: 10px; cursor: pointer; }
+    .stat-box span { display: block; font-size: 11px; color: var(--text-sub); }
+    .stat-box b { font-size: 16px; color: #fff; }
+
+    .btn-grad { background: var(--btn-grad); color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; margin-top: 10px; cursor: pointer; text-transform: uppercase; }
     .btn-outline { background: transparent; border: 1px solid #444; color: var(--text-main); padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; display: block; text-align: center; text-decoration: none; font-size: 14px; }
+
     .nav-bar { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; }
     .nav-item { text-align: center; color: #666; font-size: 11px; flex: 1; cursor: pointer; }
     .nav-item.active { color: #00e676; font-weight: bold; }
     .nav-item i { font-size: 20px; display: block; margin-bottom: 4px; }
+    
     input { background: #111; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; width: 90%; margin: 10px 0; text-align: center; }
-    .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); border-radius: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; text-align: center; }
-    .verify-btn { background: #444; color: #00e676; border: 1px solid #00e676; padding: 5px 15px; border-radius: 5px; margin-top: 5px; cursor: pointer; font-size: 12px; }
+    .lock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); border-radius: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; text-align: center; }
+    .verify-btn { background: #333; color: #00e676; border: 1px solid #00e676; padding: 6px 15px; border-radius: 5px; margin-top: 5px; cursor: pointer; font-size: 12px; }
   </style>
 </head>
 <body>
@@ -50,12 +60,12 @@
   <div id="home" class="content-section active">
     <div class="premium-banner">
       <h2 style="margin:0; font-size: 20px;">KR TAKA INCOME</h2>
-      <p style="margin:5px 0 0; font-size: 12px; opacity: 0.8;">আপনার আয়ের বিশ্বস্ত সঙ্গী</p>
+      <p style="margin:5px 0 0; font-size: 12px; opacity: 0.8;">আপনার আয়ের বিশ্বস্ত সঙ্গী 🤝</p>
     </div>
 
     <div class="user-stats-card">
       <div style="text-align:center;">
-        <p style="margin:0; font-size:14px; color:var(--text-sub);">User ID: #USR-<span id="u-id">0000</span></p>
+        <p style="margin:0; font-size:13px; color:var(--text-sub);">User ID: #USR-<span id="u-id">0000</span></p>
       </div>
       <div class="stats-grid">
         <div class="stat-box"><span>Watched Ads</span><b id="ads-count">0</b></div>
@@ -73,15 +83,15 @@
 
   <div id="tasks-page" class="content-section">
     <div class="user-stats-card" style="text-align: center;">
-      <h4 style="color: var(--accent-yellow);">📢 বাধ্যতামূলক সোশ্যাল টাস্ক</h4>
-      <p style="font-size: 12px; color: #ccc;">নিচের টাস্কগুলো না করলে ভিডিও অ্যাড লক থাকবে।</p>
+      <h4 style="color: var(--accent-yellow); margin: 0;">📢 বাধ্যতামূলক সোশ্যাল টাস্ক</h4>
+      <p style="font-size: 11px; color: #ccc; margin-bottom: 15px;">টাস্ক না করলে অ্যাড বাটন খুলবে না।</p>
       
-      <div id="fb-box" style="margin-bottom: 15px;">
+      <div id="fb-box" style="margin-bottom: 12px;">
         <a href="https://www.facebook.com/profile.php?id=61586764666017" target="_blank" class="btn-outline">ফেসবুক পেজ ফলো করুন</a>
         <button class="verify-btn" onclick="verifyTask('fb')">Verify Facebook</button>
       </div>
 
-      <div id="tt-box" style="margin-bottom: 15px;">
+      <div id="tt-box" style="margin-bottom: 12px;">
         <a href="https://tiktok.com/@krkhalidtechbangla560" target="_blank" class="btn-outline">টিকটক ফলো করুন</a>
         <button class="verify-btn" onclick="verifyTask('tt')">Verify TikTok</button>
       </div>
@@ -98,17 +108,48 @@
         <p style="font-size: 12px; color: #fff; margin-top: 10px; padding: 0 10px;">আগে উপরের ৩টি টাস্ক ভেরিফাই করুন!</p>
       </div>
       <i class="fas fa-video" style="font-size:35px; color:red; margin-bottom: 10px;"></i>
-      <h3>ভিডিও অ্যাড দেখে ইনকাম</h3>
-      <p style="font-size: 14px;">প্রতি ভিডিও: ৫ টাকা</p>
+      <h3>ভিডিও বিজ্ঞাপন</h3>
+      <p style="font-size: 14px; margin: 5px 0;">প্রতি বিজ্ঞাপন: ৫ টাকা</p>
       <button class="btn-grad" id="ad-btn" onclick="showAdAndEarn()">WATCH AD (+5.00)</button>
     </div>
   </div>
 
   <div id="rules-page" class="content-section">
-      <div class="user-stats-card" style="font-size: 13px; white-space: pre-wrap;">
-📢 **KR TAKA INCOME - বিস্তারিত কাজের নিয়মাবলী**
-(আপনার পূর্বের বিস্তারিত নিয়মাবলী এখানে থাকবে...)
-      </div>
+    <div class="premium-banner" style="padding: 10px;"><h3 style="margin:0;">📜 বিস্তারিত নিয়মাবলী</h3></div>
+    <div class="user-stats-card" style="text-align: left; line-height: 1.6; font-size: 13px; white-space: pre-wrap;">
+📢 **KR TAKA INCOME - বিস্তারিত কাজের নিয়মাবলী ও নির্দেশিকা** 📢
+
+আমাদের প্ল্যাটফর্মে কাজ করে নিশ্চিতভাবে আয় করতে এবং পেমেন্ট পেতে নিচের প্রতিটি নিয়ম অবশ্যই মেনে চলতে হবে:
+
+💰 **আয়ের সুযোগসমূহ (Earning Opportunities):**
+🎁 **জয়েনিং বোনাস:** বটে প্রথমবার প্রবেশ করলেই পাবেন ৩০ টাকা একদম ফ্রি!
+👥 **রেফারেল ইনকাম:** প্রতি সফল রেফারে পাবেন ২৫ টাকা। (বেশি আয় করতে বেশি বেশি রেফার করুন)
+👁️ **বিজ্ঞাপন আয়:** প্রতিটি বিজ্ঞাপন দেখার জন্য পাবেন ৫ টাকা।
+📅 **দৈনিক লিমিট:** প্রতিদিন সর্বোচ্চ ১০টি বিজ্ঞাপন দেখার সুযোগ পাবেন। রাত ১২টার পর লিমিট রিসেট হবে।
+
+⚠️ **বাধ্যতামূলক শর্তাবলী (Mandatory Rules):**
+১. 🔒 **টাস্ক লক:** ইনকাম শুরু করতে প্রথমেই আমাদের ফেসবুক পেজ, টিকটক আইডি এবং টেলিগ্রাম চ্যানেলে জয়েন করতে হবে। ফলো না করলে অ্যাড বাটন আনলক হবে না।
+২. 🚫 **আনফলো শর্ত:** কাজ শেষ করে পেজ বা চ্যানেল আনফলো করে দিলে আপনার পেমেন্ট বাতিল করা হতে পারে।
+৩. 💰 **উইথড্র শর্ত:** টাকা তুলতে হলে আপনার ব্যালেন্সে কমপক্ষে ১৫০০ টাকা এবং একাউন্টে ২৫টি রেফার থাকতে হবে।
+৪. ❌ **ফেক রেফার:** একটি ফোনে একাধিক একাউন্ট খুললে বা ফেক রেফার করলে একাউন্ট চিরতরে ব্লক করে দেওয়া হবে।
+
+💸 **পেমেন্ট তথ্য (Payment Methods):**
+বিকাশ এবং নগদের মাধ্যমে দ্রুত পেমেন্ট করা হয়। উইথড্র দেওয়ার ২৪-৭২ ঘণ্টার মধ্যে পেমেন্ট পাবেন।
+
+**@Kr_taka_income_bot** - সততার সাথে কাজ করুন এবং আয় করুন! 🤝
+    </div>
+  </div>
+
+  <div id="wallet-page" class="content-section">
+    <div class="user-stats-card">
+      <h3 style="text-align: center;">টাকা উত্তোলন করুন</h3>
+      <p style="color:var(--accent-yellow); font-size: 12px; text-align: center;">সর্বনিম্ন ১৫০০ টাকা ও ২৫ রেফার প্রয়োজন</p>
+      <label style="font-size: 13px;">বিকাশ/নগদ নম্বর:</label>
+      <input type="text" id="phone" placeholder="017XXXXXXXX">
+      <label style="font-size: 13px;">পরিমাণ:</label>
+      <input type="number" id="amount" placeholder="1500">
+      <button class="btn-grad" onclick="handleWithdraw()">SUBMIT WITHDRAW</button>
+    </div>
   </div>
 
   <nav class="nav-bar">
@@ -139,10 +180,11 @@
         document.getElementById("ads-count").innerText = data.adsCount || 0;
         document.getElementById("refLink").value = "https://t.me/Kr_taka_income_bot?start=" + userId;
 
-        // লক লজিক
+        // অটো-লক লজিক
         const isFollowedAll = data.fbFollowed && data.ttFollowed && data.tgFollowed;
         document.getElementById("lock-layer").style.display = isFollowedAll ? "none" : "flex";
 
+        // বাটন স্টাইল আপডেট
         if(data.fbFollowed) document.getElementById("fb-box").style.opacity = "0.5";
         if(data.ttFollowed) document.getElementById("tt-box").style.opacity = "0.5";
         if(data.tgFollowed) document.getElementById("tg-box").style.opacity = "0.5";
@@ -152,13 +194,13 @@
     });
 
     function verifyTask(type) {
-      if(confirm("আপনি কি নিশ্চিত ফলো করেছেন?")) {
+      if(confirm("আপনি কি নিশ্চিত যে ফলো করেছেন? ভুল তথ্য দিলে পেমেন্ট পাবেন না।")) {
         let update = {};
         if(type === 'fb') update.fbFollowed = true;
         if(type === 'tt') update.ttFollowed = true;
         if(type === 'tg') update.tgFollowed = true;
         userRef.update(update);
-        alert("ভেরিফাইড হয়েছে!");
+        alert("টাস্ক ভেরিফাই করা হয়েছে!");
       }
     }
 
@@ -172,6 +214,14 @@
           });
         });
       }
+    }
+
+    function handleWithdraw() {
+      userRef.once('value').then(s => {
+        const d = s.val();
+        if (d.balance < 1500 || d.referrals < 25) alert("শর্ত অপূর্ণ: ১৫০০ টাকা ও ২৫ রেফার লাগবে।");
+        else alert("উইথড্র রিকোয়েস্ট সফল হয়েছে!");
+      });
     }
 
     function showPage(id, el) {
