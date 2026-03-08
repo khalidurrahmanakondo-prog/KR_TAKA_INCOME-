@@ -16,40 +16,39 @@
       --btn-grad: linear-gradient(90deg, #00e676, #ff9100);
       --btn-rainbow: linear-gradient(90deg, #ff0000, #ff7f00, #ffeb3b, #00e676, #00b0ff, #aa00ff, #ff0000);
     }
-    body { font-family: 'Segoe UI', sans-serif; background: var(--bg-dark); color: var(--text-main); margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: var(--bg-dark); color: var(--text-main); margin: 0; padding: 0; overflow-x: hidden; }
     
-    /* Pop-up */
-    .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 5000; visibility: hidden; opacity: 0; transition: 0.3s; }
+    /* Full Screen Welcome Popup */
+    .popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; visibility: hidden; opacity: 0; transition: 0.5s; }
     .popup-overlay.show { visibility: visible; opacity: 1; }
-    .popup-card { background: white; color: black; width: 85%; max-width: 350px; border-radius: 20px; padding: 20px; text-align: center; }
-    .popup-btn { background: #007bff; color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+    .popup-card { background: #111; color: white; width: 100%; height: 100%; padding: 40px 20px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+    .popup-btn { background: var(--btn-grad); color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 30px; }
 
-    /* Layout */
     .header { padding: 15px; display: flex; align-items: center; border-bottom: 1px solid #222; background: #000; position: sticky; top: 0; z-index: 1000; }
     .profile-initial { width: 45px; height: 45px; background: var(--btn-grad); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; margin-right: 12px; }
     .content-section { padding: 15px; padding-bottom: 100px; display: none; }
     .content-section.active { display: block; }
     
-    /* Buttons */
-    .video-ad-section { background: #fff; border-radius: 20px; padding: 25px; text-align: center; border: 1px solid #ddd; margin-bottom: 15px; color: #000; }
-    
-    .watch-btn-luxury {
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-      padding: 25px 15px; border-radius: 15px; font-weight: bold; width: 100%; border: none; cursor: pointer;
-      background: var(--btn-rainbow); background-size: 200% auto;
-      animation: rainbow-move 3s linear infinite; color: white;
-    }
-    @keyframes rainbow-move { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
-    .btn-subtitle { font-size: 11px; margin-top: 5px; opacity: 0.9; }
+    /* Home Stats Layout */
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    .stat-card { background: #222; padding: 15px; border-radius: 12px; text-align: center; border: 1px solid #333; }
+    .stat-card i { font-size: 20px; color: #00e676; margin-bottom: 5px; }
+    .stat-card span { display: block; font-size: 11px; color: #aaa; }
+    .stat-card b { font-size: 15px; }
 
+    /* Rewarded Ad Button (ScreenShot Like) */
+    .video-ad-section { background: #fff; border-radius: 20px; padding: 25px; text-align: center; border: 1px solid #ddd; margin-bottom: 15px; color: #000; }
+    .watch-btn-luxury { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 25px 15px; border-radius: 15px; font-weight: bold; width: 100%; border: none; cursor: pointer; background: var(--btn-rainbow); background-size: 200% auto; animation: rainbow-move 3s linear infinite; color: white; }
+    @keyframes rainbow-move { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
+    /* Social Task */
     .social-card { background: #fff; color: #000; border-radius: 15px; padding: 15px; text-align: center; margin-bottom: 15px; border: 1px solid #ddd; }
     .social-btn-group { display: flex; gap: 10px; margin-top: 10px; }
-    .s-btn { flex: 1; padding: 10px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; color: white; font-size: 13px; text-decoration: none; }
+    .s-btn { flex: 1; padding: 12px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; color: white; font-size: 13px; text-decoration: none; display: flex; align-items: center; justify-content: center; }
 
-    /* Rules Styling - বিস্তারিত ও কঠোর */
-    .rule-box { text-align: left; background: #111; padding: 15px; border-radius: 12px; border: 1px solid #333; margin-bottom: 12px; }
-    .rule-box h5 { color: #ff3d00; margin: 0 0 8px 0; font-size: 14px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
-    .rule-box p { margin: 0; font-size: 12px; color: #bbb; line-height: 1.6; }
+    .bonus-card { background: #111; border: 1px solid #333; padding: 15px; border-radius: 15px; margin-top: 15px; text-align: center; }
+    .bonus-btn { background: var(--btn-grad); color: white; border: none; padding: 12px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .bonus-btn:disabled { background: #444; color: #888; cursor: not-allowed; }
 
     .nav-bar { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 1000; }
     .nav-item { text-align: center; color: #666; font-size: 11px; flex: 1; cursor: pointer; }
@@ -61,132 +60,161 @@
 
   <div class="popup-overlay" id="welcomePopup">
     <div class="popup-card">
-      <h2>স্বাগতম! 🔥</h2>
-      <div style="text-align: left; font-size: 13px; margin: 15px 0; line-height: 1.6;">
-        আসসালামু আলাইকুম, সততার সাথে পেমেন্ট করছি। নিয়ম মেনে কাজ করলে ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। <br><br>
-        ⚡ জয়েন্ট বোনাস: ৩০ টাকা <br>
-        💸 প্রতি রেফারে: ২৫ টাকা <br>
-        💰 প্রতি বিজ্ঞাপনে: ৫ টাকা <br>
+      <h1 style="color: #00e676; font-size: 32px; margin-bottom: 10px;">KR TAKA INCOME</h1>
+      <div style="text-align: center; font-size: 16px; margin: 20px 0; line-height: 1.8; color: #ccc;">
+        <p>আসসালামু আলাইকুম,</p>
+        <p>সততার সাথে পেমেন্ট পেতে নিয়ম মেনে কাজ করুন।</p>
+        <div style="background: #222; padding: 20px; border-radius: 15px; margin-top: 20px; color: #00e676; border: 1px solid #333;">
+            💰 জয়েন্ট বোনাস: ৩০ টাকা <br>
+            👥 প্রতি রেফারে: ২৫ টাকা <br>
+            📺 প্রতি বিজ্ঞাপনে: ৫ টাকা
+        </div>
       </div>
-      <button class="popup-btn" onclick="closePopup()">বুঝেছি</button>
+      <button class="popup-btn" onclick="closePopup()">অ্যাপে প্রবেশ করুন</button>
     </div>
   </div>
 
   <div class="header">
     <div class="profile-initial" id="profile-pic">?</div>
     <div>
-      <h4 style="margin:0;"><span id="user-name">Loading...</span> <i class="fas fa-check-circle" style="color:#00e676;"></i></h4>
+      <h4 style="margin:0;"><span id="user-full-name">Loading...</span> <i class="fas fa-check-circle" style="color:#00e676;"></i></h4>
       <p style="margin:0; font-size: 13px; color: #00e676; font-weight: bold;">ব্যালেন্স: <span id="top-balance">0</span> টাকা</p>
     </div>
   </div>
 
   <div id="home" class="content-section active">
-    <div class="video-ad-section" style="background: var(--btn-grad); color: black;">
-        <h3 style="margin:0;">KR TAKA INCOME</h3>
-        <p style="margin:5px 0 0; font-size: 12px;">আপনার আয়ের বিশ্বস্ত সঙ্গী 🤝</p>
+    <div style="background: var(--btn-grad); color: black; padding: 20px; border-radius: 15px; text-align: center; font-weight: bold; font-size: 18px;">
+        KR TAKA INCOME ড্যাশবোর্ড
     </div>
-    <div style="background:var(--card-bg); padding:15px; border-radius:15px; border:1px solid #222; text-align:center;">
-      <h4>📊 একাউন্ট ড্যাশবোর্ড</h4>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-        <div style="background:#222; padding:10px; border-radius:10px;"><span>টাকা</span><br><b id="home-balance">0.00</b></div>
-        <div style="background:#222; padding:10px; border-radius:10px;"><span>রেফার</span><br><b id="home-ref">0</b></div>
-      </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><i class="fas fa-wallet"></i><span>বর্তমান কয়েন</span><b id="home-balance">0.00</b></div>
+      <div class="stat-card"><i class="fas fa-users"></i><span>মোট রেফার</span><b id="home-ref">0</b></div>
+      <div class="stat-card"><i class="fas fa-eye"></i><span>অ্যাড ভিউ</span><b id="home-views">0</b></div>
+      <div class="stat-card"><i class="fas fa-coins"></i><span>বোনাস টাকা</span><b id="home-bonus">0.00</b></div>
     </div>
+
+    <div class="bonus-card">
+        <h4 style="margin:0; color:#ffeb3b;">🎁 ডেইলি রিওয়ার্ড</h4>
+        <p style="font-size: 11px; color:#aaa; margin-top:5px;">প্রতি ২৪ ঘণ্টায় একবার বোনাস নিন!</p>
+        <button class="bonus-btn" id="dailyBtn" onclick="claimDailyBonus()">CLAIM DAILY BONUS</button>
+        <div id="timer" style="font-size: 12px; color: #00e676; margin-top: 8px;"></div>
+    </div>
+
+    <button class="bonus-btn" style="background: #0088cc; margin-top: 20px;" onclick="shareApp()">
+        <i class="fas fa-share-alt"></i> বন্ধুদের সাথে শেয়ার করুন
+    </button>
   </div>
 
   <div id="tasks-page" class="content-section">
     <div class="video-ad-section">
         <div style="font-size: 40px; color: #007bff; margin-bottom: 10px;"><i class="fas fa-video"></i></div>
         <h4 style="margin: 5px 0;">Rewarded Ad</h4>
-        <p style="font-size: 12px; color: #555;">অ্যাড দেখে আয় করতে ভেরিফাই করুন!</p>
+        <p style="font-size: 12px; color: #555; margin-bottom: 15px;">অ্যাড দেখে আয় করতে ভেরিফাই করুন!</p>
         <button class="watch-btn-luxury" onclick="showAdAndEarn()">
-            <span>Verify <i class="fas fa-check-square"></i></span>
+            <span>Verify & Watch Ad</span>
         </button>
-        <p class="btn-subtitle">পুরস্কার পেতে ১৫ সেকেন্ডের জন্য বিজ্ঞাপনে থাকুন।</p>
+        <p style="font-size: 11px; margin-top: 8px; color: #777;">পুরস্কার পেতে ১৫ সেকেন্ড বিজ্ঞাপনে থাকুন।</p>
     </div>
 
     <div class="social-card">
         <div style="font-size: 35px; color: #0088cc;"><i class="fab fa-telegram"></i></div>
-        <h4 style="margin: 8px 0;">Join our Telegram Channel</h4>
-        <p style="font-size: 12px; color: #555;">চ্যানেলে জয়েন করুন, তারপর ফিরে এসে "Check & Claim" দিন।</p>
+        <h4 style="margin: 8px 0;">আমাদের টেলিগ্রাম চ্যানেল</h4>
+        <p style="font-size: 12px; color: #555;">সব আপডেট ও পেমেন্ট প্রুফ দেখতে জয়েন করুন।</p>
         <div class="social-btn-group">
-            <a href="https://t.me/your_telegram_link" target="_blank" class="s-btn" style="background: #007bff;">Open Channel</a>
-            <button class="s-btn" style="background: #007bff;" onclick="alert('Checking...')">Check & Claim</button>
+            <a href="https://t.me/KR_Khalid_Tech_Bangla" target="_blank" class="s-btn" style="background: #0088cc;">চ্যানেলে জয়েন করুন</a>
+            <button class="s-btn" style="background: #222;" onclick="alert('Checking Join Status...')">Check & Claim</button>
         </div>
-        <p style="font-size: 11px; margin-top: 8px; color: #777;">চ্যানেলে জয়েন করলে ১০ টাকা পাবেন।</p>
-    </div>
-  </div>
-
-  <div id="rules-page" class="content-section">
-    <div style="background:var(--card-bg); padding:15px; border-radius:15px; border:1px solid #222;">
-      <h3 style="color:#ffeb3b; text-align:center; margin-top:0;">📜 বিশেষ নিয়ম ও সতর্কতা</h3>
-      
-      <div class="rule-box">
-        <h5><i class="fas fa-ban"></i> ১. ভিপিএন (VPN) নিষিদ্ধ</h5>
-        <p>কাজ করার সময় কোনো প্রকার VPN বা Proxy ব্যবহার করা সম্পূর্ণ নিষিদ্ধ। যারা VPN ব্যবহার করবেন তাদের একাউন্ট কোনো সতর্কতা ছাড়াই পারমানেন্টলি ব্যান করা হবে।</p>
-      </div>
-      
-      <div class="rule-box">
-        <h5><i class="fas fa-users-slash"></i> ২. ফেক রেফার সতর্কতা</h5>
-        <p>একই মোবাইল দিয়ে একাধিক একাউন্ট খোলা বা ফেক রেফার করা কঠোরভাবে নিষিদ্ধ। প্রতি রেফারে ২৫ টাকা পেতে হলে রেফারকৃত ব্যক্তিকে অবশ্যই সক্রিয় হতে হবে। অবৈধ রেফারের জন্য পেমেন্ট বাতিল করা হবে।</p>
-      </div>
-
-      <div class="rule-box">
-        <h5><i class="fas fa-clock"></i> ৩. বিজ্ঞাপনের নিয়ম</h5>
-        <p>Rewarded Ad দেখার সময় কমপক্ষে ১৫ সেকেন্ড অপেক্ষা করতে হবে। বিজ্ঞাপন শেষ হওয়ার আগে কেটে দিলে আপনার ব্যালেন্সে টাকা যোগ হবে না এবং একাউন্টে পেনাল্টি দেওয়া হতে পারে।</p>
-      </div>
-
-      <div class="rule-box">
-        <h5><i class="fas fa-money-check-alt"></i> ৪. উইথড্র শর্তাবলী</h5>
-        <p>পেমেন্ট পেতে হলে আপনার একাউন্টে সর্বনিম্ন ১৫০০ টাকা এবং কমপক্ষে ২৫টি সাকসেসফুল রেফার থাকতে হবে। শর্ত পূরণ না করে উইথড্র রিকোয়েস্ট দিলে তা বাতিল করা হবে।</p>
-      </div>
-
-      <div class="rule-box">
-        <h5><i class="fas fa-shield-alt"></i> ৫. অ্যাকাউন্ট সুরক্ষা</h5>
-        <p>সিস্টেমের সাথে কোনো প্রকার কারচুপি বা হ্যাক করার চেষ্টা করলে আপনার আইপি (IP) ব্লক করে দেওয়া হবে। সততার সাথে কাজ করুন, ১০০% পেমেন্ট গ্যারান্টি।</p>
-      </div>
     </div>
   </div>
 
   <nav class="nav-bar">
     <div class="nav-item active" onclick="showPage('home', this)"><i class="fas fa-home"></i>Home</div>
     <div class="nav-item" onclick="showPage('tasks-page', this)"><i class="fas fa-tasks"></i>Tasks</div>
-    <div class="nav-item" onclick="showPage('rules-page', this)"><i class="fas fa-book"></i>Rules</div>
   </nav>
 
   <script src='//libtl.com/sdk.js' data-zone='10691247' data-sdk='show_10691247'></script>
+  
   <script>
     const firebaseConfig = { databaseURL: "https://kr-taka-income-default-rtdb.firebaseio.com/" };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
     const tg = window.Telegram.WebApp;
-    const userId = tg.initDataUnsafe?.user?.id || "USER_ID";
+    const user = tg.initDataUnsafe?.user;
+    const userId = user?.id || "USER_ID";
     const userRef = db.ref('users/' + userId);
 
     window.onload = () => { document.getElementById("welcomePopup").classList.add("show"); };
     function closePopup() { document.getElementById("welcomePopup").classList.remove("show"); }
 
+    // Real-time Data Sync with Full Name
     userRef.on('value', (snapshot) => {
       const data = snapshot.val();
-      const fName = tg.initDataUnsafe?.user?.first_name || "User";
-      document.getElementById("user-name").innerText = fName;
-      document.getElementById("profile-pic").innerText = fName.charAt(0).toUpperCase();
+      const fullName = (user?.first_name || "User") + (user?.last_name ? " " + user.last_name : "");
+      document.getElementById("user-full-name").innerText = fullName;
+      document.getElementById("profile-pic").innerText = (user?.first_name || "U").charAt(0).toUpperCase();
+      
       if (data) {
-        document.getElementById("top-balance").innerText = data.balance || 0;
+        document.getElementById("top-balance").innerText = (data.balance || 0).toFixed(2);
         document.getElementById("home-balance").innerText = (data.balance || 0).toFixed(2);
         document.getElementById("home-ref").innerText = data.referrals || 0;
-      } else { userRef.set({ name: fName, balance: 30, referrals: 0 }); }
+        document.getElementById("home-views").innerText = data.videoViews || 0;
+        document.getElementById("home-bonus").innerText = (data.totalBonus || 0).toFixed(2);
+        checkDailyBonusStatus(data.lastDaily);
+      } else { 
+        userRef.set({ name: fullName, balance: 30, referrals: 0, videoViews: 0, totalBonus: 0, lastDaily: 0 }); 
+      }
     });
 
+    // In-App Bonus System
+    function claimDailyBonus() {
+      userRef.once('value').then(s => {
+        const data = s.val();
+        const now = Date.now();
+        if (!data.lastDaily || (now - data.lastDaily) >= 86400000) {
+          userRef.update({ 
+            balance: (data.balance || 0) + 10, 
+            totalBonus: (data.totalBonus || 0) + 10, 
+            lastDaily: now 
+          });
+          alert("১০ টাকা ডেইলি বোনাস আপনার ব্যালেন্সে যোগ হয়েছে! 💰");
+        }
+      });
+    }
+
+    function checkDailyBonusStatus(lastDaily) {
+      const btn = document.getElementById("dailyBtn");
+      const timerDisplay = document.getElementById("timer");
+      if (!lastDaily) return;
+      const nextTime = lastDaily + 86400000;
+      if (Date.now() < nextTime) {
+        btn.disabled = true;
+        btn.innerText = "ALREADY CLAIMED";
+        timerDisplay.innerText = "আপনি আজ বোনাস নিয়েছেন। আগামীকাল আবার আসুন।";
+      } else {
+        btn.disabled = false;
+        btn.innerText = "CLAIM DAILY BONUS";
+        timerDisplay.innerText = "বোনাস এখন পাওয়া যাচ্ছে!";
+      }
+    }
+
+    // Ad Logic
     function showAdAndEarn() {
       if (typeof show_10691247 === 'function') {
         show_10691247().then(() => {
           userRef.once('value').then(s => {
-            userRef.update({ balance: (s.val().balance || 0) + 5 });
+            const d = s.val();
+            userRef.update({ balance: (d.balance || 0) + 5, videoViews: (d.videoViews || 0) + 1 });
             alert("৫ টাকা যোগ হয়েছে!");
           });
         });
       }
+    }
+
+    function shareApp() {
+        const link = "https://t.me/Kr_taka_income_bot?start=" + userId;
+        navigator.clipboard.writeText(link);
+        alert("আপনার রেফার লিংক কপি হয়েছে! বন্ধুদের পাঠান।");
     }
 
     function showPage(id, el) {
