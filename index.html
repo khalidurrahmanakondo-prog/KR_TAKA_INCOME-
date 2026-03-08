@@ -32,7 +32,18 @@
     
     /* Buttons */
     .video-ad-section { background: linear-gradient(145deg, #252540, #1a1a2e); border-radius: 20px; padding: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px; }
-    .watch-btn-luxury { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 18px; background: linear-gradient(90deg, #ff416c, #ff4b2b); color: white; border-radius: 15px; font-weight: bold; width: 100%; border: none; cursor: pointer; }
+    
+    /* ছবির মতো বড় ও রঙিন ভিডিও বাটন */
+    .watch-btn-luxury {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 18px; border-radius: 15px; font-weight: bold; font-size: 16px;
+      color: white; border: none; width: 100%; cursor: pointer;
+      background: var(--btn-rainbow); background-size: 200% auto;
+      animation: rainbow-move 3s linear infinite;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    @keyframes rainbow-move { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
     .bonus-btn { background: var(--btn-grad); color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: bold; margin-top: 10px; cursor: pointer; }
     .timer-text { font-size: 12px; color: #ffeb3b; margin-top: 5px; font-weight: bold; text-align: center; }
 
@@ -45,7 +56,10 @@
     .nav-item { text-align: center; color: #666; font-size: 11px; flex: 1; cursor: pointer; }
     .nav-item.active { color: #00e676; }
     .nav-item i { font-size: 20px; display: block; margin-bottom: 4px; }
-    input { background: #111; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; width: 100%; box-sizing: border-box; text-align: center; }
+    
+    /* Input & Select */
+    input, select { background: #111; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; width: 100%; box-sizing: border-box; text-align: center; font-family: inherit; }
+    select { text-align-last: center; appearance: none; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -120,44 +134,30 @@
   <div id="rules-page" class="content-section">
     <div style="background:var(--card-bg); padding:15px; border-radius:15px; border:1px solid #222;">
       <h3 style="color:#ffeb3b; text-align:center; margin-top:0;">📜 কাজের নিয়মাবলী</h3>
-      
-      <div class="rule-box">
-        <h5>১. জয়েনিং বোনাস</h5>
-        <p>বটে প্রথমবার জয়েন করলেই আপনি ৩০ টাকা স্বাগতম বোনাস পাবেন যা সরাসরি ব্যালেন্সে যোগ হবে।</p>
-      </div>
-      
-      <div class="rule-box">
-        <h5>২. রেফার ইনকাম</h5>
-        <p>প্রতি সফল রেফারে পাবেন ২৫ টাকা। ফেক রেফার বা একই ফোনে একাধিক আইডি খুললে একাউন্ট ব্যান হবে।</p>
-      </div>
-
-      <div class="rule-box">
-        <h5>৩. অ্যাড থেকে আয়</h5>
-        <p>প্রতিটি বিজ্ঞাপন দেখার জন্য পাবেন ৫ টাকা। নিয়ম মেনে অ্যাড দেখলে আয় দ্রুত বাড়বে।</p>
-      </div>
-
-      <div class="rule-box">
-        <h5>৪. সোশ্যাল টাস্ক</h5>
-        <p>আমাদের ফেসবুক ও টিকটক পেজ ফলো করা বাধ্যতামূলক। আনফলো করলে পেমেন্ট বাতিল হতে পারে।</p>
-      </div>
-
-      <div class="rule-box">
-        <h5>৫. উইথড্র শর্ত</h5>
-        <p>কমপক্ষে ১৫০০ টাকা এবং ২৫টি রেফার হলে আপনি বিকাশ বা নগদে টাকা তুলতে পারবেন।</p>
-      </div>
-
-      <div class="rule-box">
-        <h5>৬. ভিপিএন (VPN) সতর্কতা</h5>
-        <p>কাজ করার ক্ষেত্রে কোনো ধরনের VPN ব্যবহার করবেন না। নিয়ম ভঙ্গ করলে একাউন্ট ব্লক হবে।</p>
-      </div>
+      <div class="rule-box"><h5>১. জয়েনিং বোনাস</h5><p>বটে প্রথমবার জয়েন করলেই আপনি ৩০ টাকা স্বাগতম বোনাস পাবেন যা সরাসরি ব্যালেন্সে যোগ হবে।</p></div>
+      <div class="rule-box"><h5>২. রেফার ইনকাম</h5><p>প্রতি সফল রেফারে পাবেন ২৫ টাকা। ফেক রেফার বা একই ফোনে একাধিক আইডি খুললে একাউন্ট ব্যান হবে।</p></div>
+      <div class="rule-box"><h5>৩. অ্যাড থেকে আয়</h5><p>প্রতিটি বিজ্ঞাপন দেখার জন্য পাবেন ৫ টাকা। নিয়ম মেনে অ্যাড দেখলে আয় দ্রুত বাড়বে।</p></div>
+      <div class="rule-box"><h5>৪. সোশ্যাল টাস্ক</h5><p>আমাদের ফেসবুক ও টিকটক পেজ ফলো করা বাধ্যতামূলক। আনফলো করলে পেমেন্ট বাতিল হতে পারে।</p></div>
+      <div class="rule-box"><h5>৫. উইথড্র শর্ত</h5><p>কমপক্ষে ১৫০০ টাকা এবং ২৫টি রেফার হলে আপনি বিকাশ বা নগদে টাকা তুলতে পারবেন।</p></div>
+      <div class="rule-box"><h5>৬. ভিপিএন (VPN) সতর্কতা</h5><p>কাজ করার ক্ষেত্রে কোনো ধরনের VPN ব্যবহার করবেন না। নিয়ম ভঙ্গ করলে একাউন্ট ব্লক হবে।</p></div>
     </div>
   </div>
 
   <div id="wallet-page" class="content-section">
     <div style="background:var(--card-bg); padding:20px; border-radius:15px; border:1px solid #222;">
       <h3 style="text-align:center; margin-top:0;">উইথড্র করুন</h3>
-      <input type="text" id="phone" placeholder="বিকাশ/নগদ নম্বর">
+      
+      <p style="font-size: 13px; color: #999; margin-bottom: 5px;">পেমেন্ট মেথড সিলেক্ট করুন:</p>
+      <select id="method">
+        <option value="bkash">বিকাশ (bKash)</option>
+        <option value="nagad">নগদ (Nagad)</option>
+        <option value="rocket">রকেট (Rocket)</option>
+        <option value="upay">উপায় (Upay)</option>
+      </select>
+
+      <input type="text" id="phone" style="margin-top:10px;" placeholder="আপনার নম্বর লিখুন">
       <input type="number" id="amount" style="margin-top:10px;" placeholder="পরিমাণ (১৫০০+)">
+      
       <button class="bonus-btn" onclick="handleWithdraw()">SUBMIT REQUEST</button>
     </div>
   </div>
@@ -223,10 +223,24 @@
     }
 
     function handleWithdraw() {
+      const method = document.getElementById("method").value;
+      const phone = document.getElementById("phone").value;
+      const amount = document.getElementById("amount").value;
+
+      if (!phone || !amount) {
+        alert("⚠️ অনুগ্রহ করে নম্বর এবং পরিমাণ লিখুন।");
+        return;
+      }
+
       userRef.once('value').then(s => {
         const d = s.val();
-        if ((d.balance || 0) < 1500 || (d.referrals || 0) < 25) alert("⚠️ শর্ত অপূর্ণ! ১৫০০ টাকা ও ২৫টি রেফার প্রয়োজন।");
-        else alert("রিকোয়েস্ট জমা হয়েছে! ২৪-৭২ ঘণ্টার মধ্যে পেমেন্ট পাবেন। ✅");
+        if ((d.balance || 0) < 1500 || (d.referrals || 0) < 25) {
+          alert("⚠️ শর্ত অপূর্ণ! কমপক্ষে ১৫০০ টাকা এবং ২৫টি রেফার প্রয়োজন।");
+        } else if (amount < 1500) {
+          alert("⚠️ সর্বনিম্ন উইথড্র ১৫০০ টাকা।");
+        } else {
+          alert(`✅ রিকোয়েস্ট জমা হয়েছে!\nমেথড: ${method.toUpperCase()}\nনম্বর: ${phone}\n২৪-৭২ ঘণ্টার মধ্যে পেমেন্ট পাবেন।`);
+        }
       });
     }
 
